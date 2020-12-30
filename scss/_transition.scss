@@ -1,0 +1,8 @@
+.card{
+    cursor: pointer;
+    &:hover{
+        transition: all 450ms;
+        transform: scale(1.10);
+        transform-origin: center;
+    }
+}
