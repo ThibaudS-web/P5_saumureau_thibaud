@@ -28,8 +28,8 @@
                             <li class="nav-item active">
                               <a class="nav-link" href="index.html">Accueil</a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href=""></a>
+                            <li class="nav-item active">
+                              <a id='panier' class="nav-link" href="shopping_basket.html">Panier (<strong id='count'>0</strong>)</a>
                             </li>
                           </ul>
                         </div>
@@ -52,10 +52,13 @@
                           <h5 class="card-title mt-3">Faites votre personnalisation</h5>
                           <p class="card-text">Choisissez parmis vos préférences la couleur de votre ours en peluche</p>
                           <p id="card-price" class="card-text h5"></p> 
-                          <select id="selectColor" class="form-select pt-1 pb-1 rounded-bottom border-primary mb-3" aria-label="Default select example">
-                            <option selected>Choisissez votre couleur</option>                      
+                          <select id="selectColor" class="form-select py-1 rounded-bottom border-primary mb-3" aria-label="Default select example">
+                            <option selected>Choisissez votre couleur</option>
                           </select> 
-                          <button type="button" class="btn ml-5 btn-outline-secondary shadow">Ajouter à votre panier</button>
+                          <button id="btn_order" type="button" class="btn ml-5 btn-outline-secondary shadow">Ajouter à votre panier</button>
+                          <div class="alert show" role="alert">                  
+                            Veuillez sélectionner une couleur
+                           </div>                   
                         </div>
                       </div>
                     </div>
@@ -82,8 +85,9 @@
         </div>
     </footer>  
 
-<script src="js/ajax_product.js" type="text/javascript"></script> 
-<script></script>
+<script src="js/ajax_product.js" type="text/javascript"></script>
+<script src="js/shop_count.js" type="text/javascript"></script>
+
 
     
 </body>
