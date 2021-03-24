@@ -27,7 +27,6 @@ fetch(`http://localhost:3000/api/teddies/`) //accueil boucle teddies
             let linkCard = document.createElement('a')
             divChild.appendChild(linkCard).setAttribute('class', 'stretched-link btn btn-secondary')
             linkCard.setAttribute('href', `product.html?id=${teddy._id}`)
-            linkCard.setAttribute('target', 'blank')
             linkCard.setAttribute('data-identification', `${teddy._id}`)
             linkCard.innerHTML = "Commander"
 

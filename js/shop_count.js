@@ -1,9 +1,10 @@
-let ElementsNumber = localStorage.getItem('teddies_basket')
-let parseElementNumber = JSON.parse(ElementsNumber)
-
-for(element of parseElementNumber){
+function updateHeaderBasket() {
 
         let shoppingBasket = document.getElementById('count')
-        shoppingBasket.innerHTML ++
-
+        let ElementsNumber = localStorage.getItem('teddies_basket')
+        let parseElementNumber = JSON.parse(ElementsNumber)
+        shoppingBasket.innerHTML = parseElementNumber.length
+        
 }
+
+updateHeaderBasket()

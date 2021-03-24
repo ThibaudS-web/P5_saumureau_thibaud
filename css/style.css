@@ -1,6 +1,11 @@
 @charset "UTF-8";
 /*font-family*/
 /*color*/
+.card-off:hover {
+  transition: none;
+  transform: none;
+}
+
 .card {
   cursor: pointer;
 }
@@ -8,9 +13,6 @@
   transition: all 450ms;
   transform: scale(1.1);
   transform-origin: center;
-}
-.card-off:hover {
-  transform: none;
 }
 
 /*!
@@ -36,7 +38,7 @@
   --primary: #9A60DD;
   --secondary: #CD7D4A;
   --success: #28a745;
-  --info: #17a2b8;
+  --info: #E8F2E8;
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #F2E8F0;
@@ -1775,21 +1777,21 @@ pre code {
 .table-info,
 .table-info > th,
 .table-info > td {
-  background-color: #bee5eb;
+  background-color: #f9fbf9;
 }
 .table-info th,
 .table-info td,
 .table-info thead th,
 .table-info tbody + tbody {
-  border-color: #86cfda;
+  border-color: #f3f8f3;
 }
 
 .table-hover .table-info:hover {
-  background-color: #abdde5;
+  background-color: #eaf1ea;
 }
 .table-hover .table-info:hover > td,
 .table-hover .table-info:hover > th {
-  background-color: #abdde5;
+  background-color: #eaf1ea;
 }
 
 .table-warning,
@@ -2522,33 +2524,33 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-  color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  color: #212529;
+  background-color: #E8F2E8;
+  border-color: #E8F2E8;
 }
 .btn-info:hover {
-  color: #fff;
-  background-color: #138496;
-  border-color: #117a8b;
+  color: #212529;
+  background-color: #d0e4d0;
+  border-color: #c7e0c7;
 }
 .btn-info:focus, .btn-info.focus {
-  color: #fff;
-  background-color: #138496;
-  border-color: #117a8b;
-  box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+  color: #212529;
+  background-color: #d0e4d0;
+  border-color: #c7e0c7;
+  box-shadow: 0 0 0 0.2rem rgba(202, 211, 203, 0.5);
 }
 .btn-info.disabled, .btn-info:disabled {
-  color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  color: #212529;
+  background-color: #E8F2E8;
+  border-color: #E8F2E8;
 }
 .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
-  color: #fff;
-  background-color: #117a8b;
-  border-color: #10707f;
+  color: #212529;
+  background-color: #c7e0c7;
+  border-color: #bfdbbf;
 }
 .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus, .show > .btn-info.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(202, 211, 203, 0.5);
 }
 
 .btn-warning {
@@ -2747,28 +2749,28 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-info {
-  color: #17a2b8;
-  border-color: #17a2b8;
+  color: #E8F2E8;
+  border-color: #E8F2E8;
 }
 .btn-outline-info:hover {
-  color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  color: #212529;
+  background-color: #E8F2E8;
+  border-color: #E8F2E8;
 }
 .btn-outline-info:focus, .btn-outline-info.focus {
-  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(232, 242, 232, 0.5);
 }
 .btn-outline-info.disabled, .btn-outline-info:disabled {
-  color: #17a2b8;
+  color: #E8F2E8;
   background-color: transparent;
 }
 .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active, .show > .btn-outline-info.dropdown-toggle {
-  color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  color: #212529;
+  background-color: #E8F2E8;
+  border-color: #E8F2E8;
 }
 .btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-info.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(232, 242, 232, 0.5);
 }
 
 .btn-outline-warning {
@@ -4700,16 +4702,16 @@ a.badge-success:focus, a.badge-success.focus {
 }
 
 .badge-info {
-  color: #fff;
-  background-color: #17a2b8;
+  color: #212529;
+  background-color: #E8F2E8;
 }
 a.badge-info:hover, a.badge-info:focus {
-  color: #fff;
-  background-color: #117a8b;
+  color: #212529;
+  background-color: #c7e0c7;
 }
 a.badge-info:focus, a.badge-info.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(232, 242, 232, 0.5);
 }
 
 .badge-warning {
@@ -4847,15 +4849,15 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
+  color: #797e79;
+  background-color: #fafcfa;
+  border-color: #f9fbf9;
 }
 .alert-info hr {
-  border-top-color: #abdde5;
+  border-top-color: #eaf1ea;
 }
 .alert-info .alert-link {
-  color: #062c33;
+  color: #606460;
 }
 
 .alert-warning {
@@ -5194,17 +5196,17 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .list-group-item-info {
-  color: #0c5460;
-  background-color: #bee5eb;
+  color: #797e79;
+  background-color: #f9fbf9;
 }
 .list-group-item-info.list-group-item-action:hover, .list-group-item-info.list-group-item-action:focus {
-  color: #0c5460;
-  background-color: #abdde5;
+  color: #797e79;
+  background-color: #eaf1ea;
 }
 .list-group-item-info.list-group-item-action.active {
   color: #fff;
-  background-color: #0c5460;
-  border-color: #0c5460;
+  background-color: #797e79;
+  border-color: #797e79;
 }
 
 .list-group-item-warning {
@@ -6050,13 +6052,13 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #17a2b8 !important;
+  background-color: #E8F2E8 !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,
 button.bg-info:hover,
 button.bg-info:focus {
-  background-color: #117a8b !important;
+  background-color: #c7e0c7 !important;
 }
 
 .bg-warning {
@@ -6160,7 +6162,7 @@ button.bg-dark:focus {
 }
 
 .border-info {
-  border-color: #17a2b8 !important;
+  border-color: #E8F2E8 !important;
 }
 
 .border-warning {
@@ -9735,11 +9737,11 @@ a.text-success:hover, a.text-success:focus {
 }
 
 .text-info {
-  color: #17a2b8 !important;
+  color: #E8F2E8 !important;
 }
 
 a.text-info:hover, a.text-info:focus {
-  color: #0f6674 !important;
+  color: #b7d6b7 !important;
 }
 
 .text-warning {
@@ -9913,6 +9915,5 @@ h3 {
     border-color: #dee2e6;
   }
 }
-
 
 /*# sourceMappingURL=style.css.map */

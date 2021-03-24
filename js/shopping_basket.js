@@ -1,83 +1,142 @@
-// parser array / boucler / générer html
-let getArrayTeddy = localStorage.getItem('teddies_basket')
-console.log(getArrayTeddy)
-let parseArrayTeddy = JSON.parse(getArrayTeddy)
-console.log(parseArrayTeddy)
+function loadBasketbasketContent() {
 
-for(teddy of parseArrayTeddy){
+    let basketContent = document.getElementById('basket-content')
+    basketContent.innerHTML = ''
+    let getArrayTeddy = localStorage.getItem('teddies_basket')
+    let parseArrayTeddy = JSON.parse(getArrayTeddy)
 
-    //créer la carte
-    let card = document.createElement('div')             //créer un élément de balise <div>
-    card.setAttribute('class', 'card card-off shadow mb-3')                   //ajouts de class
-    let content = document.getElementById('content')    //Attraper la balise <div> avec l'id 'content'
-    content.appendChild(card)                            //Placer la carte sous celle ci
+    //créer une condition afin de notifier à l'user que son panier est vide
+    if(getArrayTeddy == null || parseArrayTeddy.length == 0){
 
-    //créer la div row
-    let row = document.createElement('div')
-    row.setAttribute('class', 'row')
-    card.appendChild(row)
-
-    //créer la div column
-    let colOne = document.createElement('div')
-    colOne.setAttribute('class', 'col-md-4')
-    row.appendChild(colOne)
-
-    //créer la div image
-    let img = document.createElement('img')
-    img.setAttribute('src', `${teddy.image}`)
-    img.setAttribute('alt', 'image de l\'ours en peluche commandé')
-    colOne.appendChild(img)
+        let msgNoProduct = document.createElement('div')
+        msgNoProduct.setAttribute('class' ,'h3 justify-basketContent-center d-flex text-dark')
+        msgNoProduct.innerHTML = "Votre panier est vide :'("
+        basketContent.appendChild(msgNoProduct)
+    }
     
-    //créer une autre div column appendChild à divRow
-    let colTwo = document.createElement('div')
-    colTwo.setAttribute('class', 'col-md-8')
-    row.appendChild(colTwo)
+    for(teddy of parseArrayTeddy){
 
-    //créer le corps de la carte 
-    let cardBody = document.createElement('div')
-    cardBody.setAttribute('class', 'card-body')
-    colTwo.appendChild(cardBody)
-
-    //créer les caractéristiques du produit commandé
-    //nom du produit
-    let teddyName = document.createElement('div')
-    teddyName.setAttribute('class', 'h5 card-title')
-    teddyName.innerHTML = 'Nom du produit : ' + teddy.name
-    cardBody.appendChild(teddyName)
-
-    //couleur du produit
-    let teddyColor = document.createElement('div')
-    teddyColor.setAttribute('class', 'h5 card-title')
-    teddyColor.innerHTML = 'Couleur sélectionnée : ' + teddy.color
-    cardBody.appendChild(teddyColor)
-
-    //nombre selectionné du produit
-    let teddyNumber = document.createElement('div')
-    teddyNumber.setAttribute('class', 'h5 card-title')
-    teddyNumber.innerHTML = 'Nombre sélectionné : ' + 
-    cardBody.appendChild(teddyNumber)
-
-    //prix total du produit 
-    let teddyPrice = document.createElement('div')
-    teddyPrice.setAttribute('class', 'h5 card-title')
-    teddyPrice.innerHTML = 'Prix : ' + teddy.price/100 + '€'
-    cardBody.appendChild(teddyPrice)
-
-    //créer le button "Ajouter"
-    let buttonAdd = document.createElement('button')
-    buttonAdd.setAttribute('class', 'btn btn-success ml-3')
-    buttonAdd.innerHTML = 'Ajouter'
-    colTwo.appendChild(buttonAdd)
-
-    //créer le button "Supprimer"
-    let buttonRemove = document.createElement('button')
-    buttonRemove.setAttribute('class', 'btn btn-danger ml-3')
-    buttonRemove.innerHTML = 'Supprimer'
-    colTwo.appendChild(buttonRemove)
+        //créer la carte
+        let card = document.createElement('div')                    //créer un élément de balise <div>
+        card.setAttribute('class', 'card card-off shadow mb-3')     //ajouts de class   
+       basketContent.appendChild(card)                            
     
+        //créer la div row
+        let row = document.createElement('div')
+        row.setAttribute('class', 'row')
+        card.appendChild(row)
+    
+        //créer la div column
+        let colOne = document.createElement('div')
+        colOne.setAttribute('class', 'col-md-4')
+        row.appendChild(colOne)
+    
+        //créer la div image
+        let img = document.createElement('img')
+        img.setAttribute('src', `${teddy.image}`)
+        img.setAttribute('alt', 'image de l\'ours en peluche commandé')
+        colOne.appendChild(img)
+        
+        //créer une autre div column appendChild à divRow
+        let colTwo = document.createElement('div')
+        colTwo.setAttribute('class', 'col-md-8')
+        row.appendChild(colTwo)
+    
+        //créer le corps de la carte 
+        let cardBody = document.createElement('div')
+        cardBody.setAttribute('class', 'card-body')
+        colTwo.appendChild(cardBody)
+    
+        //créer les caractéristiques du produit commandé
+        //nom du produit
+        let teddyName = document.createElement('div')
+        teddyName.setAttribute('class', 'h5 card-title')
+        teddyName.innerHTML = 'Nom du produit : ' + teddy.name
+        cardBody.appendChild(teddyName)
+    
+        //couleur du produit
+        let teddyColor = document.createElement('div')
+        teddyColor.setAttribute('class', 'h5 card-title')
+        teddyColor.innerHTML = 'Couleur sélectionnée : ' + teddy.color
+        cardBody.appendChild(teddyColor)
+    
+        //nombre selectionné du produit
+        let teddyNumber = document.createElement('div')
+        teddyNumber.setAttribute('class', 'h5 card-title')
+        teddyNumber.innerHTML = 'Nombre sélectionné : '
+        let orderNumber = document.createElement('strong')
+        orderNumber.setAttribute('id', 'countOrder')
+        teddyNumber.appendChild(orderNumber)
+        orderNumber.innerHTML = teddy.quantity
+        cardBody.appendChild(teddyNumber)
+    
+        //prix total du produit 
+        let teddyPrice = document.createElement('div')
+        teddyPrice.setAttribute('class', 'h5 card-title')
+        teddyPrice.innerHTML = 'Prix : ' + teddy.price + '€'
+        cardBody.appendChild(teddyPrice)
+    
+        //créer le button "Supprimer"
+        let buttonRemove = document.createElement('button')
+        buttonRemove.setAttribute('class', 'btn btn-danger ml-3')
+        buttonRemove.innerHTML = 'Supprimer'
+        colTwo.appendChild(buttonRemove)
+    
+        buttonRemove.addEventListener('click', function(){
+            deleteTeddy(teddy)
+            loadBasketbasketContent()
+            
+        })
+    }
+   
+    let totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
 
-    console.log(teddy.name)
+        return currentValue.price + accumulator
+
+    }, 0) 
+
+    let getTotalPrice = document.getElementById('total_price')
+
+    let totalQuantityOrder = parseArrayTeddy.reduce(function(acc, currV){
+
+        return parseInt(currV.quantity) + parseInt(acc)
+
+    }, 0)
+
+    getTotalPrice.innerHTML = `Pour la commande de ${totalQuantityOrder} peluches, le total de votre commande est de : ${totalPriceOrder}€`
+    
+    updateHeaderBasket()
 }
 
-console.log(parseArrayTeddy[0].image)
+
+loadBasketbasketContent()
+
+function deleteTeddy(teddy) {
+    let getArrayTeddy = localStorage.getItem('teddies_basket')
+    let parseLocalStorage = JSON.parse(getArrayTeddy)
+    console.log(parseLocalStorage)
+    
+    //On cherche l'index correspondant
+
+    let deleteTeddyIndex = parseLocalStorage.findIndex(function(currentTeddy, index, arr){
+
+        //findIndex, cherche l'élément correpondant à la condition ci-dessous 
+        //si condition est true : il renvoie l'indice du premier élément du tableau 
+        //si condition est false : il continue de parcourir le tableau 
+        return currentTeddy._id === teddy._id && currentTeddy.color === teddy.color
+
+    }) 
+    //si findIndex renvoit false pour tout les éléments du tableau parcouru, la valeur afficher est "-1"
+
+    if(deleteTeddyIndex != -1){ 
+        
+        parseLocalStorage.splice(deleteTeddyIndex, 1)
+        let stringLocalStorage = JSON.stringify(parseLocalStorage)
+        localStorage.setItem('teddies_basket', `${stringLocalStorage}`) 
+    }
+}
+
+
+
+
 

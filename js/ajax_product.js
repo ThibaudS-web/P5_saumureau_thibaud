@@ -1,8 +1,10 @@
 let colorTeddy = ''
 fetch(`http://localhost:3000/api/teddies/`)
+
     .then(function(response) {
         return response.json()
     })
+
     .then(function(teddies) {
         
         for(teddy of teddies){
@@ -12,37 +14,62 @@ fetch(`http://localhost:3000/api/teddies/`)
 
                 let img = document.querySelector('#teddyImg')
                 img.setAttribute("src", `${teddy.imageUrl}`)
+                img.setAttribute("data-id", `${teddy._id}`)
+
 
                 let desc = document.querySelector('#description')
                 desc.innerHTML = teddy.description
 
                 let priceTeddy = document.querySelector('#card-price')
-                let convertPriceTeddy = teddy.price/100
-                priceTeddy.innerHTML = "Prix : " + convertPriceTeddy + " €"
+                let teddyPriceCents = teddy.price/100
+                priceTeddy.innerHTML = "Prix : " + teddyPriceCents + " €"
                 console.log(teddy._id)
 
+                let selectQuantity = document.getElementById('teddy_quantity')
+
+                //créer une fonction de multiplication
+                function updateTeddyQuantity(nbrA, nbrB) {
+                    let totalPrice = nbrA*nbrB
+                    priceTeddy.innerHTML = "Prix : " + totalPrice + " €" 
+                    teddyObject.price = totalPrice
+                }
+
+                //créer un event permettant de selectionner le nombre de l'user pour effectuer la fonction de multiplication
+                selectQuantity.addEventListener('change', function(event){
+                    let selectedNumberQuantity = event.target.value
+                    updateTeddyQuantity(teddyPriceCents, selectedNumberQuantity)
+                    teddyObject.quantity = selectedNumberQuantity
+                    console.log(selectedNumberQuantity)
+                })
+                                  
                 const teddyObject = {
-                    name:`${teddy.name}`,
-                    color:'',
-                    price:`${teddy.price}`, 
-                    image:`${teddy.imageUrl}`        
+                    id: `${teddy._id}`,
+                    name: `${teddy.name}`,
+                    color: '',
+                    price: teddy.price/100, 
+                    quantity: 1,   
+                    image: `${teddy.imageUrl}`,     
                 }             
                 
                 btnOrder.addEventListener('click', function(){addToShoppingBasket(teddyObject)})
 
                 const selectedColor = document.querySelector('select')
-
+               
                 selectedColor.addEventListener('change', function (event){
                    colorTeddy = event.target.value
-
                 })
 
                 //Sélectionner les couleurs du produit pour les implémenter dans les balises <option>
                 for(teddy of teddy.colors){
+
                     let colorTeddy = document.getElementById("selectColor")
                     let opt = document.createElement("option")
-                    colorTeddy.appendChild(opt).setAttribute('value', `${teddy}`)
+                    opt.setAttribute('value', `${teddy}`)
+                    opt.setAttribute('class', 'class-color')
+                    opt.setAttribute('data-color', `${teddy}`)
+                    colorTeddy.appendChild(opt)
                     opt.innerHTML += teddy
+
                 }
 
             } else {
@@ -51,40 +78,41 @@ fetch(`http://localhost:3000/api/teddies/`)
         }   
     })
 
- //Ajouter le produit dans le localStorage
+//Ajouter le produit dans le localStorage
 function addToShoppingBasket(teddy){
-    
+
     teddy.color = colorTeddy
 
-    if(localStorage.getItem('teddies_basket') == null){
+    if(localStorage.getItem('teddies_basket') == null && selectOption.selected === false){
 
         let teddies_basket = []
         teddies_basket.push(teddy)
         let teddies_basketString = JSON.stringify(teddies_basket)
         localStorage.setItem('teddies_basket', `${teddies_basketString}`)
 
-    } else if(localStorage.getItem('teddies_basket') != null) {
+    } else if(localStorage.getItem('teddies_basket') != null && selectOption.selected === false) {
         
         let getTeddyArray = localStorage.getItem('teddies_basket')
         let parseArray = JSON.parse(getTeddyArray)
         parseArray.push(teddy)
         let teddyString = JSON.stringify(parseArray) 
-        localStorage.setItem('teddies_basket', `${teddyString}`)                     
-        
+        localStorage.setItem('teddies_basket', `${teddyString}`) 
+ 
     } else {
+
         console.log("ERROR")
+        
     }                  
 }
+
+let selectOption = document.querySelector('option')
 
 let alertMsg = document.querySelector('.alert')
 alertMsg.setAttribute('class', 'd-none')
 
-
 let btnOrder = document.getElementById('btn_order')
 
 btnOrder.addEventListener('click', function msgAddShopBasket() {
-
-    let selectOption = document.querySelector('option')
 
     function addProduct() {
         let shoppingBasket = document.getElementById('count')
@@ -111,9 +139,36 @@ btnOrder.addEventListener('click', function msgAddShopBasket() {
     }
 })
 
+
+
+// let teddyFound = null
+
+// parseArray.forEach((elementTeddy, index, array) => {
     
+//     let teddyID = elementTeddy.id
+//     let teddyColor = elementTeddy.color
+//     console.log(teddyID, teddyColor)
+    
+//     if(teddyID === teddy.id && teddyColor === teddy.color){
+//         console.log("réussi")
+        
+//         teddyFound = elementTeddy      
+//     }
+// });
+// let selectOption = document.querySelector('#teddy_quantity')
+// let quantityOption = document.querySelectorAll('#teddy_quantity > option')
+// console.log(quantityOption)
 
+// if(teddyFound != null){
 
-// A VOIR : localStorage  // timestamp // universaly unique Id
-//substring + indexOf
-//boucle for if id en cours = id que j'ai récupéré 
+//     j'ajoute ici la quantité sélectionnée
+//     let teddyString = JSON.stringify(parseArray) 
+//     localStorage.setItem('teddies_basket', `${teddyString}`) 
+    
+// } else {
+
+    // parseArray.push(teddy)
+    // let teddyString = JSON.stringify(parseArray) 
+    // localStorage.setItem('teddies_basket', `${teddyString}`) 
+
+// }    

@@ -1,3 +1,10 @@
+.card-off{
+    &:hover{
+        transition: none;
+        transform: none ;
+    }
+}
+
 .card{
     cursor: pointer;
     &:hover{
@@ -5,4 +12,6 @@
         transform: scale(1.10);
         transform-origin: center;
     }
+ 
 }
+
