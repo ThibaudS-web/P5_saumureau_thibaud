@@ -46,7 +46,7 @@ fetch(`http://localhost:3000/api/teddies/`)
                     id: `${teddy._id}`,
                     name: `${teddy.name}`,
                     color: '',
-                    price: teddy.price/100, 
+                    price: teddyPriceCents, 
                     quantity: 1,   
                     image: `${teddy.imageUrl}`,     
                 }             
@@ -92,11 +92,54 @@ function addToShoppingBasket(teddy){
 
     } else if(localStorage.getItem('teddies_basket') != null && selectOption.selected === false) {
         
+        
         let getTeddyArray = localStorage.getItem('teddies_basket')
         let parseArray = JSON.parse(getTeddyArray)
-        parseArray.push(teddy)
-        let teddyString = JSON.stringify(parseArray) 
-        localStorage.setItem('teddies_basket', `${teddyString}`) 
+        let teddyIndex = null
+        let teddyFound = null
+
+        parseArray.forEach((elementTeddy, index, array) => {
+            
+            
+            let teddyID = elementTeddy.id
+            let teddyColor = elementTeddy.color
+            console.log(teddyID, teddyColor)
+            
+            if(teddyID === teddy.id && teddyColor === teddy.color){
+                console.log("réussi")
+
+                teddyFound = elementTeddy
+                teddyIndex = index
+            }
+        })
+
+
+        let quantityOption = document.querySelectorAll('#teddy_quantity > option')
+        console.log(quantityOption)
+
+        if(teddyFound != null){
+
+            // j'ajoute ici la quantité sélectionnée
+
+            let newTeddyQuantity = parseInt(teddyFound.quantity) + parseInt(teddy.quantity)
+            let newTeddyPrice = teddy.price + teddyFound.price
+                   
+            console.log(newTeddyQuantity)
+            console.log(newTeddyPrice)
+            teddy.quantity = parseInt(newTeddyQuantity)
+            teddy.price = newTeddyPrice
+            parseArray.splice(teddyIndex, 1, teddy)
+                    
+            let teddyString = JSON.stringify(parseArray) 
+            localStorage.setItem('teddies_basket', `${teddyString}`) 
+            
+        } else {
+
+            parseArray.push(teddy)
+            let teddyString = JSON.stringify(parseArray) 
+            localStorage.setItem('teddies_basket', `${teddyString}`) 
+
+        }
  
     } else {
 

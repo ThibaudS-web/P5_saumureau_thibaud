@@ -1,17 +1,17 @@
-.card-off{
-    &:hover{
-        transition: none;
-        transform: none ;
-    }
-}
-
 .card{
     cursor: pointer;
     &:hover{
-        transition: all 450ms;
+        transition: all 350ms;
         transform: scale(1.10);
         transform-origin: center;
     }
  
 }
 
+.card-off{
+    cursor: pointer;
+    &:hover{
+        transition: none;
+        transform: none ;
+    }
+}

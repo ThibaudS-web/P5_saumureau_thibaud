@@ -1,18 +1,21 @@
 @charset "UTF-8";
 /*font-family*/
 /*color*/
-.card-off:hover {
-  transition: none;
-  transform: none;
-}
-
 .card {
   cursor: pointer;
 }
 .card:hover {
-  transition: all 450ms;
+  transition: all 350ms;
   transform: scale(1.1);
   transform-origin: center;
+}
+
+.card-off {
+  cursor: pointer;
+}
+.card-off:hover {
+  transition: none;
+  transform: none;
 }
 
 /*!

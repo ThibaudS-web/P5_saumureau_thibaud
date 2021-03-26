@@ -4,8 +4,6 @@ fetch(`http://localhost:3000/api/teddies/`) //accueil boucle teddies
     })
 
     .then(function(teddies){
-    //let teddyOne = teddies[0] //ID TEDDY data-identifiant = id teddy this.data-id page product
-    //console.log(teddyOne)
         
        for(let teddy of teddies){
             console.log(teddy)

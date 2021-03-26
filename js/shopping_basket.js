@@ -68,12 +68,13 @@ function loadBasketbasketContent() {
         orderNumber.setAttribute('id', 'countOrder')
         teddyNumber.appendChild(orderNumber)
         orderNumber.innerHTML = teddy.quantity
+        console.log(teddy.quantity)
         cardBody.appendChild(teddyNumber)
     
-        //prix total du produit 
+        //prix unitaire et total du produit 
         let teddyPrice = document.createElement('div')
         teddyPrice.setAttribute('class', 'h5 card-title')
-        teddyPrice.innerHTML = 'Prix : ' + teddy.price + '€'
+        teddyPrice.innerHTML = 'Prix unitaire : ' + teddy.price/teddy.quantity + '€ || Total : ' + teddy.price  +'€'
         cardBody.appendChild(teddyPrice)
     
         //créer le button "Supprimer"

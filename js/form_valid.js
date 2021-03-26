@@ -1,5 +1,5 @@
 let form = document.querySelector('#orderForm')
-//============================================================================ firstName
+//============================================================================ Prénom
 
 //On écoute sur le changement d'état de l'input
 form.firstName.addEventListener('change', function(){
@@ -7,9 +7,9 @@ form.firstName.addEventListener('change', function(){
 })
 
 //On crée une fonction pour la validation du prénom
-const validFirstName = function(inputFirstName){
+function validFirstName(inputFirstName){
     //Création de l'expression régulière pour validation email
-    let firstNameRegExp = new RegExp('^[A-Z][A-Za-z\é\è\ê\ç\-]+$', 'g')
+    let firstNameRegExp = new RegExp('^[A-Z][A-Za-z\é\è\ê\ç\\s\-]+$', 'g')
 
     //récupération de la balise <small> 
     let smallFirstName = inputFirstName.nextElementSibling
@@ -36,7 +36,7 @@ form.lastName.addEventListener('change', function(){
 })
 
 //On crée une fonction pour la validation du nom
-const validlastName = function(inputLastName){
+function validlastName(inputLastName){
     //Création de l'expression régulière pour validation email
     let lastNameRegExp = new RegExp('^[A-Z\é\è\ê\ç\\s\-]+$', 'g')
 
@@ -61,12 +61,12 @@ const validlastName = function(inputLastName){
 //============================================================================ Adresse DE LIVRAISON
 
 //On écoute sur le changement d'état de l'input
-form.adress.addEventListener('change', function(){
-    validAdress(this)
+form.address.addEventListener('change', function(){
+    validAddress(this)
 })
 
 //On crée une fonction pour la validation de l'email
-const validAdress = function(inputAdress){
+function validAddress(inputAdress){
     //Création de l'expression régulière pour validation email
     let adressRegExp = new RegExp('^[0-9]+[A-Za-z\é\è\ê\,\ç\\s\-]+$', 'g')
     //récupération de la balise <small> 
@@ -94,7 +94,7 @@ form.city.addEventListener('change', function(){
 })
 
 //On crée une fonction pour la validation de l'email
-const validCity = function(inputCity){
+function validCity(inputCity){
     //Création de l'expression régulière pour validation email
     let cityRegExp = new RegExp('^[A-Za-z\é\è\ê\'\ç\\s\-]+$', 'g')
     //récupération de la balise <small> 
@@ -117,12 +117,13 @@ const validCity = function(inputCity){
 //============================================================================ EMAIL
 
 //On écoute sur le changement d'état de l'input
-form.email.addEventListener('change', function(){
+
+form.email.addEventListener('change', function(event){
     validEmail(this)
 })
 
 //On crée une fonction pour la validation de l'email
-const validEmail = function(inputEmail){
+function validEmail(inputEmail){
     //Création de l'expression régulière pour validation email
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
 
@@ -144,18 +145,63 @@ const validEmail = function(inputEmail){
     }
 }
 
+
+
+//On crée un objet contact sur l'event click pour la validation de commande 
+
 //============================================================================ SOUMISSION DU FORMULAIRE
 
 form.addEventListener('submit', function(event){
 
     event.preventDefault()
+    
+    if(validFirstName(form.firstName) && 
+        validlastName(form.lastName) && 
+        validAddress(form.address) && 
+        validEmail(form.email) && 
+        validCity(form.city)){
 
-    if(validFirstName(form.firstName) && validlastName(form.lastName) && validAdress(form.adress) && validEmail(form.email) && validCity(form.city)){
+            let contactValue = {
+                firstName : form.firstName.value,
+                lastName : form.lastName.value,
+                address: form.address.value,
+                city: form.city.value, 
+                email: form.email.value
+            }
+          
+            let getLocalTeddies = localStorage.getItem('teddies_basket')
+            let arrayTeddies = JSON.parse(getLocalTeddies)
+            let productsValue = arrayTeddies.map(teddy => teddy.id )
+            
+            let postBody = {
+                contact: contactValue,
+                products: productsValue
+            }
 
-        form.submit()
-        window.location.replace('http://127.0.0.1:5501/order_confirmation.html')
+        fetch('http://localhost:3000/api/teddies/order',{
+            method: "POST", 
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(postBody)
+
+        })
+        
+        .then(function(response){
+            return response.json()
+        })
+
+        .then(function(body){
+            //créer le query parameter et envoyer le orderID dans l'url
+            let orderIDParam = new URLSearchParams(window.location.search)
+            orderIDParam.set('orderID', `${body.orderId}`)
+            window.location.search = orderIDParam
+            window.location.replace(`http://127.0.0.1:5501/order_confirmation.html?${orderIDParam}`)
+        })
     
     } else {
         console.log('ERROR')
     }
 })
+
+//footer-bottom 0 
