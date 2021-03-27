@@ -1,3 +1,6 @@
+//On déclare la variable totalPriceOrder, on s'en sert dans le script de validatioon de formulaire. 
+let totalPriceOrder 
+
 function loadBasketbasketContent() {
 
     let basketContent = document.getElementById('basket-content')
@@ -90,7 +93,7 @@ function loadBasketbasketContent() {
         })
     }
    
-    let totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
+    totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
 
         return currentValue.price + accumulator
 

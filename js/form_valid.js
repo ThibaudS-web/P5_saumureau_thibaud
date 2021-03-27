@@ -192,11 +192,13 @@ form.addEventListener('submit', function(event){
         })
 
         .then(function(body){
-            //créer le query parameter et envoyer le orderID dans l'url
-            let orderIDParam = new URLSearchParams(window.location.search)
-            orderIDParam.set('orderID', `${body.orderId}`)
-            window.location.search = orderIDParam
-            window.location.replace(`http://127.0.0.1:5501/order_confirmation.html?${orderIDParam}`)
+            // créer le query parameter et envoyer le orderID dans l'url
+            let searchParams = new URLSearchParams(window.location.search)
+            searchParams.set('orderID', `${body.orderId}`)
+            searchParams.set('priceOrder', `${totalPriceOrder}`)
+            window.location.search = searchParams
+
+            window.location.replace(`http://127.0.0.1:5501/order_confirmation.html?${searchParams}`)
         })
     
     } else {
