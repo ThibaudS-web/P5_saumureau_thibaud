@@ -1,4 +1,4 @@
-//On déclare la variable totalPriceOrder, on s'en sert dans le script de validatioon de formulaire. 
+//On déclare la variable totalPriceOrder, on s'en sert dans le script de validation de formulaire. 
 let totalPriceOrder 
 
 function loadBasketbasketContent() {
@@ -17,7 +17,7 @@ function loadBasketbasketContent() {
         basketContent.appendChild(msgNoProduct)
     }
     
-    for(teddy of parseArrayTeddy){
+    for(let teddy of parseArrayTeddy){
 
         //créer la carte
         let card = document.createElement('div')                    //créer un élément de balise <div>
@@ -79,6 +79,8 @@ function loadBasketbasketContent() {
         teddyPrice.setAttribute('class', 'h5 card-title')
         teddyPrice.innerHTML = 'Prix unitaire : ' + teddy.price/teddy.quantity + '€ || Total : ' + teddy.price  +'€'
         cardBody.appendChild(teddyPrice)
+        console.log(teddy.price)
+        console.log(teddy.price/teddy.quantity)
     
         //créer le button "Supprimer"
         let buttonRemove = document.createElement('button')
@@ -88,11 +90,10 @@ function loadBasketbasketContent() {
     
         buttonRemove.addEventListener('click', function(){
             deleteTeddy(teddy)
-            loadBasketbasketContent()
-            
+            loadBasketbasketContent()       
         })
     }
-   
+
     totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
 
         return currentValue.price + accumulator

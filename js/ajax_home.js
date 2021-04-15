@@ -1,4 +1,5 @@
-fetch(`http://localhost:3000/api/teddies/`) //accueil boucle teddies
+//http://localhost:3000/api/teddies/
+fetch(`http://localhost:3000/api/teddies`) //accueil boucle teddies
     .then(function(response){
     return response.json()
     })
