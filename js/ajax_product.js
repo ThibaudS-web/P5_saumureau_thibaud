@@ -61,15 +61,15 @@ selectedColor.addEventListener('change', function (event) {
 })
 
 /////////////
-//FUNCTIONS//
+//FUNCTIONS//   
 /////////////
 
+//Afficher l'image du teddy
 function displayImageTeddy(teddy) {
     let img = document.querySelector('#teddyImg')
     img.setAttribute("src", `${teddy.image}`)
     img.setAttribute("data-id", `${teddy._id}`)
 }
-
 
 function displayDescriptionTeddy(teddyDescription) {
     let desc = document.querySelector('#description')
@@ -115,10 +115,8 @@ function displayColorsTeddy(teddy) {
 //Ajouter le produit dans le localStorage
 function addToShoppingBasket() {
 
-    currentTeddy.price *= currentTeddy.quantity
-    
-    if (localStorage.getItem('teddies_basket') == null && selectOption.selected === false) {
 
+    if (localStorage.getItem('teddies_basket') == null && selectOption.selected === false) {
         let teddies_basket = [] 
         teddies_basket.push(currentTeddy)
         let teddies_basketString = JSON.stringify(teddies_basket)
@@ -147,12 +145,12 @@ function addToShoppingBasket() {
         if (teddyFound != null) {
 
             let newTeddyQuantity = currentTeddy.quantity + teddyFound.quantity 
-            let newTeddyPrice = currentTeddy.price + teddyFound.price
+            // let newTeddyPrice = currentTeddy.price + teddyFound.price
 
             console.log("===", newTeddyQuantity)
-            console.log(newTeddyPrice)
+            // console.log(newTeddyPrice)
             teddyFound.quantity = newTeddyQuantity
-            teddyFound.price = newTeddyPrice
+            // teddyFound.price = newTeddyPrice
             parseArray.splice(teddyIndex, 1, teddyFound)
 
             let teddyString = JSON.stringify(parseArray)

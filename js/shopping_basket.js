@@ -22,7 +22,7 @@ function loadBasketbasketContent() {
         //créer la carte
         let card = document.createElement('div')                    //créer un élément de balise <div>
         card.setAttribute('class', 'card card-off shadow mb-3')     //ajouts de class   
-       basketContent.appendChild(card)                            
+        basketContent.appendChild(card)                            
     
         //créer la div row
         let row = document.createElement('div')
@@ -37,6 +37,7 @@ function loadBasketbasketContent() {
         //créer la div image
         let img = document.createElement('img')
         img.setAttribute('src', `${teddy.image}`)
+        img.setAttribute('class', "card-img")
         img.setAttribute('alt', 'image de l\'ours en peluche commandé')
         colOne.appendChild(img)
         
@@ -77,26 +78,27 @@ function loadBasketbasketContent() {
         //prix unitaire et total du produit 
         let teddyPrice = document.createElement('div')
         teddyPrice.setAttribute('class', 'h5 card-title')
-        teddyPrice.innerHTML = 'Prix unitaire : ' + teddy.price/teddy.quantity + '€ || Total : ' + teddy.price  +'€'
+        let totalPrice = teddy.price * teddy.quantity
+        teddyPrice.innerHTML = 'Prix unitaire : ' + teddy.price + '€ || Total : ' + totalPrice  +'€'
         cardBody.appendChild(teddyPrice)
         console.log(teddy.price)
         console.log(teddy.price/teddy.quantity)
     
         //créer le button "Supprimer"
         let buttonRemove = document.createElement('button')
-        buttonRemove.setAttribute('class', 'btn btn-danger ml-3')
-        buttonRemove.innerHTML = 'Supprimer'
-        colTwo.appendChild(buttonRemove)
+        buttonRemove.setAttribute('class', 'btn btn-danger')
+        buttonRemove.innerHTML = "Supprimer"
+        cardBody.appendChild(buttonRemove)
     
         buttonRemove.addEventListener('click', function(){
             deleteTeddy(teddy)
             loadBasketbasketContent()       
         })
     }
-
+    
     totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
 
-        return currentValue.price + accumulator
+        return currentValue.price * currentValue.quantity  + accumulator
 
     }, 0) 
 
@@ -112,7 +114,6 @@ function loadBasketbasketContent() {
     
     updateHeaderBasket()
 }
-
 
 loadBasketbasketContent()
 
