@@ -206,5 +206,3 @@ form.addEventListener('submit', function(event){
         console.log('ERROR : Formulaire invalide')
     }
 })
-
-//footer-bottom 0 

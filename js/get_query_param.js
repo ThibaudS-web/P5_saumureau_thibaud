@@ -4,7 +4,7 @@ let orderID = params.get("orderID")
 let priceOrder = params.get("priceOrder")
 
 //afficher le prix total de la commande dans la div
-let innerTextPriceOrder = document.querySelector('h1')
+let innerTextPriceOrder = document.getElementById('innerPriceOrder')
 innerTextPriceOrder.innerHTML = `Votre commande de ${priceOrder}€ a bien été prise en compte !`
 
 //afficher numéro de commande dans la div

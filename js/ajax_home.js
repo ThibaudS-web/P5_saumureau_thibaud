@@ -7,7 +7,6 @@ fetch(`http://localhost:3000/api/teddies`) //accueil boucle teddies
     .then(function(teddies){
         
        for(let teddy of teddies){
-            console.log(teddy)
             //Créer la div parent
             let divParent = document.createElement('div')
             divParent.setAttribute('class', 'col-12 col-md-12 col-lg-12 mb-5')

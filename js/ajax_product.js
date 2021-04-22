@@ -71,7 +71,6 @@ for (let number of quantitiesTeddyArray) {
 function displayPriceTeddy(teddy) {
     let priceTeddy = document.querySelector('#card-price')
     let teddyPriceCents = teddy.price
-    console.log(teddyPriceCents)
     priceTeddy.innerHTML = "Prix : " + teddyPriceCents + " €"
 }
 
