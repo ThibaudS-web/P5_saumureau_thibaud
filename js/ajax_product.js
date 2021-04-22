@@ -1,3 +1,4 @@
+//On créé un objet currentTeddy qui sera le l'objet user. On rajoute la quantité sélectionnée par l'user.
 const currentTeddy = {
     id: null,
     name: null,
@@ -7,7 +8,7 @@ const currentTeddy = {
     image: null,
     description: null
 }
-//http://localhost:3000/api/teddies
+
 fetch(`http://localhost:3000/api/teddies`)
 
     .then(function (response) {
@@ -23,8 +24,9 @@ fetch(`http://localhost:3000/api/teddies`)
             }
         }
     })
-
+//cette fonction appelle les fonctions d'affichage initiale.
 function updateTeddyInfo(teddy) {
+    //On injecte les données du teddy API dans le currentTeddy.
     currentTeddy.id = teddy._id
     currentTeddy.name = teddy.name
     currentTeddy.image = teddy.imageUrl
@@ -33,49 +35,29 @@ function updateTeddyInfo(teddy) {
     currentTeddy.quantity = 1
    
     displayImageTeddy(currentTeddy)
-
     displayDescriptionTeddy(currentTeddy.description)
-   
     displayPriceTeddy(currentTeddy)
-    //Sélectionner les couleurs du produit pour les implémenter dans les balises <option>
     displayColorsTeddy(teddy)  
 }
-
-/////////////////////
-//ADDEVENTLISTENERS//
-/////////////////////
-
-//créer un event permettant de selectionner le nombre de l'user pour effectuer la fonction de multiplication
-let selectQuantity = document.getElementById('teddy_quantity')
-selectQuantity.addEventListener('change', function(quantity) {
-    updateDisplayTeddy(parseInt(quantity.target.value))
-    console.log(quantity.target.value)
-})
-
-let btnOrder = document.getElementById('btn_order')
-btnOrder.addEventListener('click', function () {addToShoppingBasket(currentTeddy)})
-
-const selectedColor = document.querySelector('select')
-selectedColor.addEventListener('change', function (event) {
-    currentTeddy.color = event.target.value
-})
 
 /////////////
 //FUNCTIONS//   
 /////////////
 
-//Afficher l'image du teddy
+//Afficher l'image du teddy.
 function displayImageTeddy(teddy) {
     let img = document.querySelector('#teddyImg')
     img.setAttribute("src", `${teddy.image}`)
     img.setAttribute("data-id", `${teddy._id}`)
 }
 
+//Afficher la description du teddy.
 function displayDescriptionTeddy(teddyDescription) {
     let desc = document.querySelector('#description')
     desc.innerHTML = teddyDescription
 }
 
+//Création du tableau de quantité de teddy, quantité 1 par défaut.
 let quantitiesTeddyArray = [2, 3, 4, 5, 6, 7, 8, 9, 10]
 let select = document.getElementById('teddy_quantity')  
 for (let number of quantitiesTeddyArray) {
@@ -85,6 +67,7 @@ for (let number of quantitiesTeddyArray) {
     select.appendChild(option)
 }
 
+//Afficher le prix du teddy
 function displayPriceTeddy(teddy) {
     let priceTeddy = document.querySelector('#card-price')
     let teddyPriceCents = teddy.price
@@ -92,6 +75,7 @@ function displayPriceTeddy(teddy) {
     priceTeddy.innerHTML = "Prix : " + teddyPriceCents + " €"
 }
 
+//Modifier le prix du teddy quand l'user sélectionne une quantité.  
 function updateDisplayTeddy(quantity) {
     let priceTeddy = document.querySelector('#card-price')
     let teddyPriceCents = currentTeddy.price
@@ -100,62 +84,55 @@ function updateDisplayTeddy(quantity) {
     currentTeddy.quantity = quantity
 }
 
+//Sélectionner les couleurs du produit pour les implémenter dans les balises <option>.
 function displayColorsTeddy(teddy) {
     for (let color of teddy.colors) {
         let colorTeddy = document.getElementById("selectColor")
         let opt = document.createElement("option")
         opt.setAttribute('value', `${color}`)
-        opt.setAttribute('class', 'class-color')
-        opt.setAttribute('data-color', `${color}`)
         colorTeddy.appendChild(opt)
         opt.innerHTML += color
     }
 }
-
-//Ajouter le produit dans le localStorage
+let selectOption = document.querySelector('option')
+//Ajouter le produit dans le localStorage, pour l'utiliser dans le panier. 
 function addToShoppingBasket() {
 
-
+    //Si l'item "teddies_basket" n'existe pas et que l'user a sélectionné une couleur. On créé un nouveau tableau "teddies_basket", on y ajoute le currentTeddy modifié par l'user, on stringify le tableau pour l'envoyer au localStorage
     if (localStorage.getItem('teddies_basket') == null && selectOption.selected === false) {
         let teddies_basket = [] 
         teddies_basket.push(currentTeddy)
         let teddies_basketString = JSON.stringify(teddies_basket)
         localStorage.setItem('teddies_basket', `${teddies_basketString}`)
 
+    //Sinon si "teddies_basket" existe et que l'user a sélectionné une couleur. On attrape l'item du localStorage, on le parse pour obtenir le tableau "teddies_basket".
     } else if (localStorage.getItem('teddies_basket') != null && selectOption.selected === false) {
 
         let getTeddyArray = localStorage.getItem('teddies_basket')
         let parseArray = JSON.parse(getTeddyArray)
         let teddyIndex = null
         let teddyFound = null
-
+        //On parcours le tableau pour chaque élément à l'intérieur de celui-ci. On attrape les données ID et Color. 
         parseArray.forEach((elementTeddy, index, array) => {
 
             let teddyID = elementTeddy.id
             let teddyColor = elementTeddy.color
-
+            //Si l'ID et la couleur du teddy user correspond au teddy dans le tableau alors on assigne les valeurs suivantes.
             if (teddyID === currentTeddy.id && teddyColor === currentTeddy.color) {
-                console.log("réussi")
-
                 teddyFound = elementTeddy
                 teddyIndex = index
             }
         })
-
+        //Si un teddy dans le panier correspond avec un nouvel objet currentTeddy. On créé une variable pour la nouvelle quantité. On supprime du tableau l'ancien teddy qui sera remplacé par le nouveau avec la mise à jour de sa quantité avec la fonction splice().
+        //On converti le tableau en string puis on l'envoi dans le localStorage.
         if (teddyFound != null) {
 
             let newTeddyQuantity = currentTeddy.quantity + teddyFound.quantity 
-            // let newTeddyPrice = currentTeddy.price + teddyFound.price
-
-            console.log("===", newTeddyQuantity)
-            // console.log(newTeddyPrice)
             teddyFound.quantity = newTeddyQuantity
-            // teddyFound.price = newTeddyPrice
             parseArray.splice(teddyIndex, 1, teddyFound)
-
             let teddyString = JSON.stringify(parseArray)
             localStorage.setItem('teddies_basket', `${teddyString}`)
-
+        //Sinon on ajoute le currentTeddy au tableau, on converti le tableau puis on l'envoi dans le localStorage. 
         } else {
 
             parseArray.push(currentTeddy)
@@ -171,26 +148,27 @@ function addToShoppingBasket() {
     }
 }
 
-let selectOption = document.querySelector('option')
 
 let alertMsg = document.querySelector('.alert')
-alertMsg.setAttribute('class', 'd-none')
-
-btnOrder.addEventListener('click', function msgAddShopBasket() {
+// alertMsg.setAttribute('class', 'd-none')
+//Cette fonction permet d'afficher 
+function msgAddShopBasket() {
 
     function addProduct() {
         let shoppingBasket = document.getElementById('count')
         shoppingBasket.innerHTML++
     }
-
+    //Si la balise option avec l'attribut "selected" est sélectionnée quand l'user commande son article. 
     if (selectOption.selected === true) {
-        //Changer la couleur de l'input si l'user ne choisit pas la couleur du produit + alert d'avertissement
-        alertMsg.classList.remove('d-none')
+        //Changer la couleur de l'input si l'user ne choisit pas la couleur du produit + alerte indiquant à l'user qu'il doit choisir une couleur.
         alertMsg.classList.add('alert-danger')
         let removeColor = document.querySelector('#selectColor')
         removeColor.classList.remove('border-primary')
         removeColor.classList.add('border-danger')
-
+        alertMsg.classList.remove('d-none')
+        alertMsg.innerHTML = "Veuillez sélectionner une couleur"
+        
+    //Sinon l'input prend la couleur de validation et un message de confirmation est envoyé à l'user.
     } else {
         let removeColor = document.querySelector('#selectColor')
         removeColor.classList.add('border-success')
@@ -201,4 +179,28 @@ btnOrder.addEventListener('click', function msgAddShopBasket() {
         alertMsg.innerHTML = "Un nouvel article a été rajouté à votre panier !"
         addProduct()
     }
+}
+
+/////////////////////
+//ADDEVENTLISTENERS//
+/////////////////////
+
+//Ecouter l'évenement quand l'user sélectionne une quantité sur le HTML.
+let selectQuantity = document.getElementById('teddy_quantity')
+selectQuantity.addEventListener('change', function(quantity) {
+    updateDisplayTeddy(parseInt(quantity.target.value))
 })
+
+//Ecouter l'évenement quand l'user click sur le boutton "Ajouter au panier".
+let btnOrder = document.getElementById('btn_order')
+btnOrder.addEventListener('click', function () {addToShoppingBasket(currentTeddy)})
+
+//Ecouter l'évenement quand l'user click sur le boutton "Ajouter au panier".
+btnOrder.addEventListener('click', msgAddShopBasket)
+
+//Ecouter l'évenement quand l'user sélectionne une couleur sur le HTML.
+const selectedColor = document.querySelector('select')
+selectedColor.addEventListener('change', function (event) {
+    currentTeddy.color = event.target.value
+})
+

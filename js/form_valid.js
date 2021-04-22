@@ -1,5 +1,6 @@
+/* eslint-disable no-useless-escape */
 let form = document.querySelector('#orderForm')
-//============================================================================ Prénom
+//============================================================================ PRENOM
 
 //On écoute sur le changement d'état de l'input
 form.firstName.addEventListener('change', function(){
@@ -22,7 +23,7 @@ function validFirstName(inputFirstName){
         smallFirstName.setAttribute('class', 'text-success')
         return true
     } else {
-        smallFirstName.innerHTML= "Prénom non valide : commencez votre prénom par une majuscule ! "
+        smallFirstName.innerHTML= "Prénom invalide : commencez votre prénom par une majuscule ! "
         smallFirstName.classList.remove("text-succes")
         smallFirstName.setAttribute('class', 'text-danger')
         return false
@@ -51,14 +52,14 @@ function validlastName(inputLastName){
         smallLastName.setAttribute('class', 'text-success')
         return true
     } else {
-        smallLastName.innerHTML= "Nom non valide : veuillez saisir votre nom en majuscule ! "
+        smallLastName.innerHTML= "Nom invalide : veuillez saisir votre nom en majuscule ! "
         smallLastName.classList.remove("text-succes")
         smallLastName.setAttribute('class', 'text-danger')
         return false
     }
 }
 
-//============================================================================ Adresse DE LIVRAISON
+//============================================================================ ADRESSE DE LIVRAISON
 
 //On écoute sur le changement d'état de l'input
 form.address.addEventListener('change', function(){
@@ -75,12 +76,12 @@ function validAddress(inputAdress){
     //On test l'expression régulière
     let testAdress = adressRegExp.test(inputAdress.value)
     if(testAdress){
-        smallAdress.innerHTML= "Adress valide !"
+        smallAdress.innerHTML= "Adresse valide !"
         smallAdress.classList.remove("text-danger")
         smallAdress.setAttribute('class', 'text-success')
         return true
     } else {
-        smallAdress.innerHTML= "Adress non valide ! "
+        smallAdress.innerHTML= "Adresse invalide ! "
         smallAdress.classList.remove("text-succes")
         smallAdress.setAttribute('class', 'text-danger')
         return false
@@ -108,7 +109,7 @@ function validCity(inputCity){
         smallCity.setAttribute('class', 'text-success')
         return true
     } else {
-        smallCity.innerHTML= "Ville non valide ! "
+        smallCity.innerHTML= "Ville invalide ! "
         smallCity.classList.remove("text-succes")
         smallCity.setAttribute('class', 'text-danger')
         return false
@@ -118,7 +119,7 @@ function validCity(inputCity){
 
 //On écoute sur le changement d'état de l'input
 
-form.email.addEventListener('change', function(event){
+form.email.addEventListener('change', function(){
     validEmail(this)
 })
 
@@ -138,7 +139,7 @@ function validEmail(inputEmail){
         smallEmail.setAttribute('class', 'text-success')
         return true
     } else {
-        smallEmail.innerHTML= "Adress-mail non valide ! "
+        smallEmail.innerHTML= "Adress-mail invalide ! "
         smallEmail.classList.remove("text-succes")
         smallEmail.setAttribute('class', 'text-danger')
         return false
@@ -154,14 +155,14 @@ function validEmail(inputEmail){
 form.addEventListener('submit', function(event){
 
     event.preventDefault()
-    
+    //Si tout les champs de formulaires sont valides (true)
     if(validFirstName(form.firstName) && 
         validlastName(form.lastName) && 
         validAddress(form.address) && 
         validEmail(form.email) && 
         validCity(form.city)){
-
-            let contactValue = {
+            //Création de l'objet "contact"
+            const contactValue = {
                 firstName : form.firstName.value,
                 lastName : form.lastName.value,
                 address: form.address.value,
@@ -192,7 +193,7 @@ form.addEventListener('submit', function(event){
         })
 
         .then(function(body){
-            // créer le query parameter et envoyer le orderID dans l'url
+            // créer le query parameter et envoyer le numero de commande user et le prix total dans l'url
             let searchParams = new URLSearchParams(window.location.search)
             searchParams.set('orderID', `${body.orderId}`)
             searchParams.set('priceOrder', `${totalPriceOrder}`)
@@ -202,7 +203,7 @@ form.addEventListener('submit', function(event){
         })
     
     } else {
-        console.log('ERROR')
+        console.log('ERROR : Formulaire invalide')
     }
 })
 

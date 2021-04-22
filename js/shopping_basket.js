@@ -8,11 +8,10 @@ function loadBasketbasketContent() {
     let getArrayTeddy = localStorage.getItem('teddies_basket')
     let parseArrayTeddy = JSON.parse(getArrayTeddy)
 
-    //créer une condition afin de notifier à l'user que son panier est vide
+    //Une condition afin de notifier à l'user que son panier est vide
     if(getArrayTeddy == null || parseArrayTeddy.length == 0){
-
         let msgNoProduct = document.createElement('div')
-        msgNoProduct.setAttribute('class' ,'h3 justify-basketContent-center d-flex text-dark')
+        msgNoProduct.setAttribute('class' ,'h3 justify-content-center d-flex text-dark')
         msgNoProduct.innerHTML = "Votre panier est vide :'("
         basketContent.appendChild(msgNoProduct)
     }
@@ -72,30 +71,28 @@ function loadBasketbasketContent() {
         orderNumber.setAttribute('id', 'countOrder')
         teddyNumber.appendChild(orderNumber)
         orderNumber.innerHTML = teddy.quantity
-        console.log(teddy.quantity)
         cardBody.appendChild(teddyNumber)
     
-        //prix unitaire et total du produit 
+        //afficher le prix unitaire et le total du produit 
         let teddyPrice = document.createElement('div')
         teddyPrice.setAttribute('class', 'h5 card-title')
         let totalPrice = teddy.price * teddy.quantity
         teddyPrice.innerHTML = 'Prix unitaire : ' + teddy.price + '€ || Total : ' + totalPrice  +'€'
         cardBody.appendChild(teddyPrice)
-        console.log(teddy.price)
-        console.log(teddy.price/teddy.quantity)
     
         //créer le button "Supprimer"
         let buttonRemove = document.createElement('button')
         buttonRemove.setAttribute('class', 'btn btn-danger')
         buttonRemove.innerHTML = "Supprimer"
         cardBody.appendChild(buttonRemove)
-    
+        
+        //Supprime le teddy sélectionné par l'user et affiche la page sans le teddy qui a été supprimé
         buttonRemove.addEventListener('click', function(){
             deleteTeddy(teddy)
             loadBasketbasketContent()       
         })
     }
-    
+    //Attrape dans le tableau des teddies les prix et les quantités pour avoir le prix total de la commande. Le Array.reduce() va traiter chaque valeur d'une liste, ici le prix, afin de la réduire à une seule valeur. 
     totalPriceOrder = parseArrayTeddy.reduce(function(accumulator, currentValue){
 
         return currentValue.price * currentValue.quantity  + accumulator
@@ -104,15 +101,14 @@ function loadBasketbasketContent() {
 
     let getTotalPrice = document.getElementById('total_price')
 
+    //Attrape dans le tableau des teddies la quantités pour avoir le prix total de la commande.
     let totalQuantityOrder = parseArrayTeddy.reduce(function(acc, currV){
 
-        return parseInt(currV.quantity) + parseInt(acc)
+        return currV.quantity + acc
 
     }, 0)
 
     getTotalPrice.innerHTML = `Pour la commande de ${totalQuantityOrder} peluches, le total de votre commande est de : ${totalPriceOrder}€`
-    
-    updateHeaderBasket()
 }
 
 loadBasketbasketContent()
@@ -120,7 +116,6 @@ loadBasketbasketContent()
 function deleteTeddy(teddy) {
     let getArrayTeddy = localStorage.getItem('teddies_basket')
     let parseLocalStorage = JSON.parse(getArrayTeddy)
-    console.log(parseLocalStorage)
     
     //On cherche l'index correspondant
 

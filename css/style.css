@@ -330,6 +330,8 @@ legend {
   white-space: normal;
 }
 
+
+
 progress {
   vertical-align: baseline;
 }
@@ -4406,8 +4408,7 @@ input[type=button].btn-block {
 .card-img-bottom {
   flex-shrink: 0;
   width: 100%;
-  width: 320px;
-  height:230px
+  height: 100%;
 }
 
 .card-img,
@@ -9921,4 +9922,19 @@ h3 {
   }
 }
 
+body{
+position: relative;
+min-height: 100vh;
+padding-bottom: 130px;
+
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+ 
 /*# sourceMappingURL=style.css.map */
