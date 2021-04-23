@@ -182,7 +182,7 @@ sup {
 }
 
 a {
-  color: #9A60DD;
+  color: #f2f2f2;
   text-decoration: none;
   background-color: transparent;
 }
@@ -476,6 +476,7 @@ mark,
 
 .list-inline-item {
   display: inline-block;
+  color: white
 }
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
