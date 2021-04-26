@@ -2,7 +2,8 @@
 import {updateHeaderBasket} from './shop_count.js'
 updateHeaderBasket()
 //On déclare la variable totalPriceOrder, on s'en sert dans le script de validation de formulaire.
-let totalPriceOrder 
+export let totalPriceOrder 
+
 function loadbasketContent() {
 
     let basketContent = document.getElementById('basket-content')
@@ -21,30 +22,30 @@ function loadbasketContent() {
     for(let teddy of parseArrayTeddy){
 
         //créer la carte
-        let card = document.createElement('div')                    //créer un élément de balise <div>
-        card.setAttribute('class', 'card card-off shadow mb-3')     //ajouts de class   
+        let card = document.createElement('div')                    
+        card.setAttribute('class', 'card card-off shadow mb-3')     
         basketContent.appendChild(card)                            
     
         //créer la div row
         let row = document.createElement('div')
-        row.setAttribute('class', 'row')
+        row.setAttribute('class', 'row g-0')
         card.appendChild(row)
     
         //créer la div column
         let colOne = document.createElement('div')
-        colOne.setAttribute('class', 'col-md-4')
+        colOne.setAttribute('class', 'col-md-5')
         row.appendChild(colOne)
     
         //créer la div image
         let img = document.createElement('img')
         img.setAttribute('src', `${teddy.image}`)
-        img.setAttribute('class', "card-img")
+        img.setAttribute('class', "img-fluid")
         img.setAttribute('alt', 'image de l\'ours en peluche commandé')
         colOne.appendChild(img)
         
         //créer une autre div column appendChild à divRow
         let colTwo = document.createElement('div')
-        colTwo.setAttribute('class', 'col-md-8')
+        colTwo.setAttribute('class', 'col-md-7')
         row.appendChild(colTwo)
     
         //créer le corps de la carte 
@@ -84,7 +85,7 @@ function loadbasketContent() {
     
         //créer le button "Supprimer"
         let buttonRemove = document.createElement('button')
-        buttonRemove.setAttribute('class', 'btn btn-danger')
+        buttonRemove.setAttribute('class', ' btn btn-danger')
         buttonRemove.innerHTML = "Supprimer"
         cardBody.appendChild(buttonRemove)
         

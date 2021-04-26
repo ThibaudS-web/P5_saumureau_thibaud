@@ -3,15 +3,15 @@
     &:hover{
         transition: all 350ms;
         transform: scale(1.10);
-        transform-origin: center;
+        transform-origin: center
     }
  
 }
 
 .card-off{
-    cursor: pointer;
     &:hover{
+        cursor: default;
         transition: none;
-        transform: none ;
+        transform: none
     }
 }

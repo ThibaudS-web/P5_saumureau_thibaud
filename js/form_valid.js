@@ -1,3 +1,4 @@
+import {totalPriceOrder} from "./shopping_basket.js"
 /* eslint-disable no-useless-escape */
 let form = document.querySelector('#orderForm')
 //============================================================================ PRENOM
@@ -146,12 +147,9 @@ function validEmail(inputEmail){
     }
 }
 
-
-
 //On crée un objet contact sur l'event click pour la validation de commande 
 
 //============================================================================ SOUMISSION DU FORMULAIRE
-
 form.addEventListener('submit', function(event){
 
     event.preventDefault()
@@ -179,7 +177,7 @@ form.addEventListener('submit', function(event){
                 contact: contactValue,
                 products: productsValue
             }
-
+            
         fetch('http://localhost:3000/api/teddies/order',{
             method: "POST", 
             headers: {
@@ -192,8 +190,8 @@ form.addEventListener('submit', function(event){
         .then(function(response){
             return response.json()
         })
-
         .then(function(body){
+            
             // créer le query parameter et envoyer le numero de commande user et le prix total dans l'url
             let searchParams = new URLSearchParams(window.location.search)
             searchParams.set('orderID', `${body.orderId}`)
