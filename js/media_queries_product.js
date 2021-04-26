@@ -8,7 +8,6 @@ function mediaQueriesPhone () {
 
     if(window.innerWidth < smartphone){
         divBackGround.classList.remove('border', 'shadow', 'bg-light')
-        // priceDisplay.classList.add('ml-5')
         
     } else {
         divBackGround.classList.add('border', 'shadow', 'bg-light')       

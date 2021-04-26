@@ -3,7 +3,7 @@ import {updateHeaderBasket} from './shop_count.js'
 updateHeaderBasket()
 //On déclare la variable totalPriceOrder, on s'en sert dans le script de validation de formulaire.
 let totalPriceOrder 
-function loadBasketbasketContent() {
+function loadbasketContent() {
 
     let basketContent = document.getElementById('basket-content')
     basketContent.innerHTML = ''
@@ -91,7 +91,7 @@ function loadBasketbasketContent() {
         //Supprime le teddy sélectionné par l'user et affiche la page sans le teddy qui a été supprimé
         buttonRemove.addEventListener('click', function(){
             deleteTeddy(teddy)
-            loadBasketbasketContent()
+            loadbasketContent()
             updateHeaderBasket()       
         })
     }
@@ -114,7 +114,7 @@ function loadBasketbasketContent() {
     getTotalPrice.innerHTML = `Pour la commande de ${totalQuantityOrder} peluches, le total de votre commande est de : ${totalPriceOrder}€`
 }
 
-loadBasketbasketContent()
+loadbasketContent()
 
 function deleteTeddy(teddy) {
     let getArrayTeddy = localStorage.getItem('teddies_basket')
