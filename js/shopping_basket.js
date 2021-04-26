@@ -89,7 +89,8 @@ function loadBasketbasketContent() {
         //Supprime le teddy sélectionné par l'user et affiche la page sans le teddy qui a été supprimé
         buttonRemove.addEventListener('click', function(){
             deleteTeddy(teddy)
-            loadBasketbasketContent()       
+            loadBasketbasketContent()
+            updateHeaderBasket()       
         })
     }
     //Attrape dans le tableau des teddies les prix et les quantités pour avoir le prix total de la commande. Le Array.reduce() va traiter chaque valeur d'une liste, ici le prix, afin de la réduire à une seule valeur. 
@@ -119,6 +120,7 @@ function deleteTeddy(teddy) {
     
     //On cherche l'index correspondant
 
+    // eslint-disable-next-line no-unused-vars
     let deleteTeddyIndex = parseLocalStorage.findIndex(function(currentTeddy, index, arr){
 
         //findIndex, cherche l'élément correpondant à la condition ci-dessous 

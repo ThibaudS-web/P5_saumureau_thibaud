@@ -1,10 +1,15 @@
 function updateHeaderBasket() {
-
         let shoppingBasket = document.getElementById('count')
-        let ElementsNumber = localStorage.getItem('teddies_basket')
-        let parseElementNumber = JSON.parse(ElementsNumber)
-        shoppingBasket.innerHTML = parseElementNumber.length
-        
-}
+        let getTeddies = localStorage.getItem("teddies_basket")
+        let arrayGetTeddies =  JSON.parse(getTeddies)
 
+        let totalCount = arrayGetTeddies.reduce(function(accumulator, currentValue){
+
+                return currentValue.quantity + accumulator
+        }, 0)
+
+        shoppingBasket.innerHTML =  totalCount 
+
+}
 updateHeaderBasket()
+

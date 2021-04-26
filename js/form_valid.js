@@ -155,8 +155,11 @@ function validEmail(inputEmail){
 form.addEventListener('submit', function(event){
 
     event.preventDefault()
+    let getLocalTeddies = localStorage.getItem('teddies_basket')
+    let arrayTeddies = JSON.parse(getLocalTeddies)
     //Si tout les champs de formulaires sont valides (true)
-    if(validFirstName(form.firstName) && 
+    if(arrayTeddies.length > 0 &&
+        validFirstName(form.firstName) && 
         validlastName(form.lastName) && 
         validAddress(form.address) && 
         validEmail(form.email) && 
@@ -168,10 +171,8 @@ form.addEventListener('submit', function(event){
                 address: form.address.value,
                 city: form.city.value, 
                 email: form.email.value
-            }
-          
-            let getLocalTeddies = localStorage.getItem('teddies_basket')
-            let arrayTeddies = JSON.parse(getLocalTeddies)
+            }          
+            
             let productsValue = arrayTeddies.map(teddy => teddy.id )
             
             let postBody = {

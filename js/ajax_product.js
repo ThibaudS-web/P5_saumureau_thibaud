@@ -93,6 +93,7 @@ function displayColorsTeddy(teddy) {
         opt.innerHTML += color
     }
 }
+
 let selectOption = document.querySelector('option')
 //Ajouter le produit dans le localStorage, pour l'utiliser dans le panier. 
 function addToShoppingBasket() {
@@ -112,6 +113,7 @@ function addToShoppingBasket() {
         let teddyIndex = null
         let teddyFound = null
         //On parcours le tableau pour chaque élément à l'intérieur de celui-ci. On attrape les données ID et Color. 
+        // eslint-disable-next-line no-unused-vars
         parseArray.forEach((elementTeddy, index, array) => {
 
             let teddyID = elementTeddy.id
@@ -147,16 +149,11 @@ function addToShoppingBasket() {
     }
 }
 
-
 let alertMsg = document.querySelector('.alert')
 // alertMsg.setAttribute('class', 'd-none')
 //Cette fonction permet d'afficher 
 function msgAddShopBasket() {
 
-    function addProduct() {
-        let shoppingBasket = document.getElementById('count')
-        shoppingBasket.innerHTML++
-    }
     //Si la balise option avec l'attribut "selected" est sélectionnée quand l'user commande son article. 
     if (selectOption.selected === true) {
         //Changer la couleur de l'input si l'user ne choisit pas la couleur du produit + alerte indiquant à l'user qu'il doit choisir une couleur.
@@ -176,7 +173,6 @@ function msgAddShopBasket() {
         alertMsg.classList.remove('alert-danger')
         alertMsg.classList.add('alert-success')
         alertMsg.innerHTML = "Un nouvel article a été rajouté à votre panier !"
-        addProduct()
     }
 }
 
@@ -192,10 +188,10 @@ selectQuantity.addEventListener('change', function(quantity) {
 
 //Ecouter l'évenement quand l'user click sur le boutton "Ajouter au panier".
 let btnOrder = document.getElementById('btn_order')
-btnOrder.addEventListener('click', function () {addToShoppingBasket(currentTeddy)})
-
-//Ecouter l'évenement quand l'user click sur le boutton "Ajouter au panier".
-btnOrder.addEventListener('click', msgAddShopBasket)
+btnOrder.addEventListener('click', function (){
+    addToShoppingBasket(currentTeddy), 
+    msgAddShopBasket(),
+    updateHeaderBasket()})
 
 //Ecouter l'évenement quand l'user sélectionne une couleur sur le HTML.
 const selectedColor = document.querySelector('select')
