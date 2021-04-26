@@ -1,6 +1,8 @@
-//On déclare la variable totalPriceOrder, on s'en sert dans le script de validation de formulaire. 
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import {updateHeaderBasket} from './shop_count.js'
+updateHeaderBasket()
+//On déclare la variable totalPriceOrder, on s'en sert dans le script de validation de formulaire.
 let totalPriceOrder 
-
 function loadBasketbasketContent() {
 
     let basketContent = document.getElementById('basket-content')

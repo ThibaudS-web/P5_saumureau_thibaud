@@ -1,3 +1,6 @@
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import {updateHeaderBasket} from './shop_count.js'
+updateHeaderBasket()
 //On créé un objet currentTeddy qui sera le l'objet user. On rajoute la quantité sélectionnée par l'user.
 const currentTeddy = {
     id: null,
@@ -194,7 +197,7 @@ btnOrder.addEventListener('click', function (){
     updateHeaderBasket()})
 
 //Ecouter l'évenement quand l'user sélectionne une couleur sur le HTML.
-const selectedColor = document.querySelector('select')
+let selectedColor = document.querySelector('select')
 selectedColor.addEventListener('change', function (event) {
     currentTeddy.color = event.target.value
 })

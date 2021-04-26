@@ -1,4 +1,6 @@
-//http://localhost:3000/api/teddies/
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import {updateHeaderBasket} from './shop_count.js'
+updateHeaderBasket()
 fetch(`http://localhost:3000/api/teddies`) //accueil boucle teddies
     .then(function(response){
     return response.json()
@@ -31,7 +33,7 @@ fetch(`http://localhost:3000/api/teddies`) //accueil boucle teddies
             document.querySelector('#cont').appendChild(divParent)                     
         }                 
     })
-               
+
 
 
 
