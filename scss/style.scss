@@ -1,6 +1,9 @@
 /*####################################OVERRIDES BOOTSTRAPS CSS####################################*/
 
+//================================color================================//
+
 $secondary: #CD7D4A;
+
  /*===============================BOOTSTRAP=============================*/
 
  @import "../node_modules/bootstrap/scss/bootstrap.scss";
@@ -10,14 +13,8 @@ $secondary: #CD7D4A;
 
 $headings-font-family: "Times New Roman";
 
-/*================================color================================*/
 
-$primary: #9A60DD;
-$secondary: #CD7D4A;
-$light: #F2E8F0;
-$dark: #04040C;
-$headings-color: #284876;
-$info : #E8F2E8;
+
 
 /*=================================card================================*/
 
@@ -62,5 +59,15 @@ footer {
         margin-right: 0;
     }
 }
+
+@media screen and (max-width: 768px) {
+   #city-media{
+       margin-top: 25px;
+   }
+}
+
+
+
+
 
 
