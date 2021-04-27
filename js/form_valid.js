@@ -190,6 +190,7 @@ form.addEventListener('submit', function(event){
         .then(function(response){
             return response.json()
         })
+        
         .then(function(body){
             
             // créer le query parameter et envoyer le numero de commande user et le prix total dans l'url
