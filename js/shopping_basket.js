@@ -28,7 +28,7 @@ function loadbasketContent() {
     
         //créer la div row
         let row = document.createElement('div')
-        row.setAttribute('class', 'row g-0')
+        row.setAttribute('class', 'row g-0 d-flex align-items-center')
         card.appendChild(row)
     
         //créer la div column

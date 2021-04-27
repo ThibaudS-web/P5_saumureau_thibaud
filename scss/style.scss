@@ -1,4 +1,49 @@
-@import "./variable_overrides";
-@import "./transition";
+/*####################################OVERRIDES BOOTSTRAPS CSS####################################*/
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+ /*===============================BOOTSTRAP=============================*/
+
+ @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+/*=============================font-family=============================*/
+
+$headings-font-family: "Times New Roman";
+
+/*================================color================================*/
+
+$primary: #9A60DD;
+$secondary: #CD7D4A;
+$light: #F2E8F0;
+$dark: #04040C;
+$headings-color: #284876;
+$info : #E8F2E8;
+
+/*=================================card================================*/
+
+.card{
+    cursor: pointer;
+    &:hover{
+        transition: all 350ms;
+        transform: scale(1.10);
+        transform-origin: center
+    }
+ 
+}
+
+.card-off{
+    &:hover{
+        cursor: default;
+        transition: none;
+        transform: none
+    }
+}
+
+/*=============================Media-queries============================*/
+
+@media screen and (max-width: 1100px) and (min-width: 480px){
+    .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}   
