@@ -4,11 +4,12 @@ export function updateHeaderBasket() {
         let getTeddies = localStorage.getItem("teddies_basket")
         let arrayGetTeddies =  JSON.parse(getTeddies)
 
-        let totalCount = arrayGetTeddies.reduce(function(accumulator, currentValue){
+        if(arrayGetTeddies != null){
+                let totalCount = arrayGetTeddies.reduce(function(accumulator, currentValue){
 
-                return currentValue.quantity + accumulator
-        }, 0)
-
-        shoppingBasket.innerHTML =  totalCount 
+                        return currentValue.quantity + accumulator
+                }, 0)
+                shoppingBasket.innerHTML =  totalCount 
+        }
 }
 
