@@ -4,5 +4,5 @@
 `npm install` in the terminal to install **node_modules**.
 
 ## Run MongoDB
-Move to the folder **JWPD5** and `node server` in the terminal to start **MongoDB**.
+Move to the folder **JWPD5** run `npm install` and `node server` in the terminal to start **MongoDB**.
 
