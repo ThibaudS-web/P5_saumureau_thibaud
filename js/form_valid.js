@@ -193,7 +193,7 @@ form.addEventListener('submit', function(event){
 
         .then(function(body){
             
-            // créer le query parameter et envoyer le numero de commande user et le prix total dans l'url
+            // Créer le query parameter et envoyer le numero de commande user et le prix total dans l'url
             let searchParams = new URLSearchParams(window.location.search)
             searchParams.set('orderID', `${body.orderId}`)
             searchParams.set('priceOrder', `${totalPriceOrder}`)
