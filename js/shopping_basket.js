@@ -1,6 +1,3 @@
-//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
-import {updateHeaderBasket} from './shop_count.js'
-updateHeaderBasket()
 //On déclare la variable totalPriceOrder, on l'export pour le script de validation de formulaire.
 export let totalPriceOrder 
 
@@ -142,7 +139,8 @@ function deleteTeddy(teddy) {
     }
 }
 
-
-
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import {updateHeaderBasket} from './shop_count.js'
+updateHeaderBasket()
 
 

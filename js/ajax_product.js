@@ -1,6 +1,3 @@
-//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
-import {updateHeaderBasket} from './shop_count.js'
-updateHeaderBasket()
 //On créé un objet currentTeddy qui sera le l'objet user. On rajoute la quantité sélectionnée par l'user.
 const currentTeddy = {
     id: null,
@@ -201,4 +198,8 @@ let selectedColor = document.querySelector('select')
 selectedColor.addEventListener('change', function (event) {
     currentTeddy.color = event.target.value
 })
+
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import {updateHeaderBasket} from './shop_count.js'
+updateHeaderBasket()
 

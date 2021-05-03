@@ -1,4 +1,5 @@
 export function updateHeaderBasket() {
+        
         let shoppingBasket = document.getElementById('count')
         let getTeddies = localStorage.getItem("teddies_basket")
         let arrayGetTeddies =  JSON.parse(getTeddies)

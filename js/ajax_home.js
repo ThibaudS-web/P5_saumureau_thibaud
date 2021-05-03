@@ -1,17 +1,13 @@
-//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
-import { updateHeaderBasket } from './shop_count.js'
-updateHeaderBasket()
-fetch(`http://localhost:3000/api/teddies`) // On demande la liste des teddies disponibles
+// On demande à l'API la liste des teddies disponibles
+fetch(`http://localhost:3000/api/teddies`) 
     .then(function (response) {
         return response.json()
     })
 
     .then(function (teddies) {
-
         for (let teddy of teddies) {
             loadHomeContent(teddy)
         }
-
     })
 
 function loadHomeContent(teddy) {
@@ -39,6 +35,9 @@ function loadHomeContent(teddy) {
     document.querySelector('#cont').appendChild(divParent)
 }
 
+//On importe la fonction ci-dessous pour mettre à jour le compteur du panier
+import { updateHeaderBasket } from './shop_count.js'
+updateHeaderBasket()
 
 
 
