@@ -8,7 +8,7 @@ Install external dependencies :
 $ npm install
 ```  
 
-### Start the server
+Start the server
 ```
 $ node server
 ``` 
