@@ -25,7 +25,7 @@ $ npm install http-server -g
 ``` 
 Start the server :
 ```
-$ http-server -p <port>
+$ http-server -c-1 -p 5500
 ```
 
 Application should be available at http://localhost:5500/index.html 
